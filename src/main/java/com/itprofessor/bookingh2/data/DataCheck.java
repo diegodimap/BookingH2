@@ -33,7 +33,7 @@ public class DataCheck {
     }
 
     public String getOverlappingBookings(String start_date, String end_date, int property_id){
-        String sql = "SELECT * FROM booking WHERE start_date >= '"+start_date+"' AND end_date <= '"+end_date+"' AND property_id="+property_id;
+        String sql = "SELECT * FROM booking WHERE '"+start_date+"' <= end_date AND '"+end_date+"' >= start_date  AND property_id="+property_id;
         try{
             rs = stmt.executeQuery(sql);
             result = "";
@@ -49,7 +49,7 @@ public class DataCheck {
     }
 
     public String getOverlappingBlocks(String start_date, String end_date, int property_id) {
-        String sql = "SELECT * FROM block WHERE start_date >= '"+start_date+"' AND end_date <= '"+end_date+"' AND property_id="+property_id;
+        String sql = "SELECT * FROM block WHERE '"+start_date+"' <= end_date AND '"+end_date+"' >= start_date  AND property_id="+property_id;
         try{
             rs = stmt.executeQuery(sql);
             result = "";
