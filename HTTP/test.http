@@ -1,0 +1,63 @@
+POST http://localhost:8080/createBooking
+Content-Type: application/json
+
+{
+
+  "property_id":2,
+  "user_id":3,
+  "start_date": "2023/11/20",
+  "end_date": "2023/11/25"
+
+}
+
+###
+PUT http://localhost:8080/updateBooking/1
+Content-Type: application/json
+
+{
+
+"property_id":1,
+"user_id":3,
+"start_date": "2023/11/10",
+"end_date": "2023/11/12"
+
+}
+
+###
+DELETE http://localhost:8080/deleteBooking/1
+Content-Type: application/json
+
+###
+GET http://localhost:8080/listBookings
+
+###
+POST http://localhost:8080/createBlock
+Content-Type: application/json
+
+{
+
+  "property_id":2,
+  "start_date": "2023/11/1",
+  "end_date": "2023/11/10"
+
+}
+
+###
+PUT http://localhost:8080/updateBlock/1
+Content-Type: application/json
+
+{
+
+  "property_id":5,
+  "start_date": "2023/11/12",
+  "end_date": "2023/11/17"
+
+}
+
+###
+DELETE http://localhost:8080/deleteBlock/1
+
+###
+GET http://localhost:8080/listBlocks
+
+
