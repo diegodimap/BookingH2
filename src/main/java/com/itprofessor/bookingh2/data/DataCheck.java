@@ -32,9 +32,8 @@ public class DataCheck {
         }
     }
 
-    public String getBookings(String start_date, String end_date, int property_id){
+    public String getOverlappingBookings(String start_date, String end_date, int property_id){
         String sql = "SELECT * FROM booking WHERE start_date >= '"+start_date+"' AND end_date <= '"+end_date+"' AND property_id="+property_id;
-        System.out.println(sql);
         try{
             rs = stmt.executeQuery(sql);
             resultado = "";
@@ -43,7 +42,7 @@ public class DataCheck {
                 resultado += rs.getInt("id");
             }
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         return resultado;

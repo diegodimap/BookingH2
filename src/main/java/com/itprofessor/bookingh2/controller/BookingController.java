@@ -41,10 +41,7 @@ public class BookingController {
 
         //before saving, need to verify if dates are not blocked nor overlap other bookings
         DataCheck dataCheck = new DataCheck();
-        System.out.println(startDate);
-        System.out.println(endDate);
-        String result = dataCheck.getBookings(h2DateFormat(startDate), h2DateFormat(endDate), bookingDto.getProperty_id());
-        System.out.println(result);
+        String result = dataCheck.getOverlappingBookings(h2DateFormat(startDate), h2DateFormat(endDate), bookingDto.getProperty_id());
 
         //overlaping booking = false
         if(result.length() == 0) {
@@ -52,10 +49,6 @@ public class BookingController {
         }
 
         return booking.getId();
-    }
-
-    private String h2DateFormat(Date date) {
-        return (date.getYear()+1900) + "-" + (date.getMonth()+1) + "-" + date.getDate();
     }
 
     @PutMapping("/updateBooking/{id}")
@@ -100,13 +93,7 @@ public class BookingController {
         return json;
     }
 
-    @GetMapping("/data")
-    public String checkData() throws JsonProcessingException {
-        DataCheck dataCheck = new DataCheck();
-
-        String teste = dataCheck.getBookings("2023-11-10", "2023-11-15", 3);
-
-        return teste;
+    private String h2DateFormat(Date date) {
+        return (date.getYear()+1900) + "-" + (date.getMonth()+1) + "-" + date.getDate();
     }
-
 }
