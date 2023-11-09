@@ -39,12 +39,15 @@ public class BookingController {
         booking.setStart_date(startDate);
         booking.setEnd_date(endDate);
 
-        //before saving, need to verify if dates are not blocked nor overlap other bookings
+        //before saving, need to verify if dates do not overlap other bookings
         DataCheck dataCheck = new DataCheck();
-        String result = dataCheck.getOverlappingBookings(h2DateFormat(startDate), h2DateFormat(endDate), bookingDto.getProperty_id());
+        String overlapBookings = dataCheck.getOverlappingBookings(h2DateFormat(startDate), h2DateFormat(endDate), bookingDto.getProperty_id());
 
-        //overlaping booking = false
-        if(result.length() == 0) {
+        //also need to check if there are no blocks for the selected date range
+        String blocks = dataCheck.getOverlappingBlocks(h2DateFormat(startDate), h2DateFormat(endDate), bookingDto.getProperty_id());
+
+        //if there is no overlapping bookings nor blocks for the selected range, then the booking is created.
+        if(overlapBookings.length() == 0 && blocks.length() == 0) {
             repository.save(booking);
         }
 

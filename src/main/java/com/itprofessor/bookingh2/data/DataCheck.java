@@ -12,7 +12,7 @@ public class DataCheck {
     private Statement stmt;
     private ResultSet rs;
     public Connection conn;
-    public String resultado = "";
+    public String result = "";
 
     public DataCheck() {
         try {
@@ -24,7 +24,7 @@ public class DataCheck {
                 conn = DriverManager.getConnection(url, usr, pas);
                 stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             } catch (Exception e) {
-                System.out.println("Error" + e.getMessage());
+                e.printStackTrace();
             }
         } catch (Exception ex) {
             Logger.getLogger(DataCheck.class.getName()).log(Level.SEVERE, null, ex);
@@ -36,16 +36,31 @@ public class DataCheck {
         String sql = "SELECT * FROM booking WHERE start_date >= '"+start_date+"' AND end_date <= '"+end_date+"' AND property_id="+property_id;
         try{
             rs = stmt.executeQuery(sql);
-            resultado = "";
+            result = "";
 
             while (rs.next()) {
-                resultado += rs.getInt("id");
+                result += rs.getInt("id");
             }
         }catch(Exception e){
             e.printStackTrace();
         }
 
-        return resultado;
+        return result;
     }
 
+    public String getOverlappingBlocks(String start_date, String end_date, int property_id) {
+        String sql = "SELECT * FROM block WHERE start_date >= '"+start_date+"' AND end_date <= '"+end_date+"' AND property_id="+property_id;
+        try{
+            rs = stmt.executeQuery(sql);
+            result = "";
+
+            while (rs.next()) {
+                result += rs.getInt("id");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 }
