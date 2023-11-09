@@ -1,11 +1,9 @@
 package com.itprofessor.bookingh2.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @Setter
